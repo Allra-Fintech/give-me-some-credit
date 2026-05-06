@@ -5,7 +5,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
 
-from give_me_some_credit.features.engineering import TARGET
+from credit.features.engineering import TARGET
 
 FEATURE_COLS = [
     "revolving_utilization_of_unsecured_lines",

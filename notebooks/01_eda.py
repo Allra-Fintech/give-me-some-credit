@@ -26,7 +26,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-from give_me_some_credit.data import load_train
+from credit.data import load_train
 
 sns.set_theme(style="whitegrid")
 

@@ -25,10 +25,10 @@ output_path: str = "../outputs/03_model_training.ipynb"
 # %%
 import joblib
 
-from give_me_some_credit.data import load_train
-from give_me_some_credit.features import build_features
-from give_me_some_credit.models import evaluate, train
-from give_me_some_credit.utils import get_logger
+from credit.data import load_train
+from credit.features import build_features
+from credit.models import evaluate, train
+from credit.utils import get_logger
 
 log = get_logger("03_model_training")
 

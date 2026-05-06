@@ -23,8 +23,8 @@ output_path: str = "../outputs/02_feature_engineering.ipynb"
 # %%
 import pandas as pd
 
-from give_me_some_credit.data import load_train
-from give_me_some_credit.features import build_features
+from credit.data import load_train
+from credit.features import build_features
 
 # %%
 raw = load_train()

@@ -2,7 +2,7 @@
 
 ## Architecture
 
-- **Logic** lives in `give_me_some_credit/` (the installable package). Never put business logic in notebooks.
+- **Logic** lives in `credit/` (the installable package). Never put business logic in notebooks.
 - **Notebooks** in `notebooks/` are Jupytext percent-format `.py` files — they are the presentation layer only.
 - **Papermill** executes notebooks programmatically; all notebooks must have a `parameters` tagged cell.
 - `.ipynb` files are gitignored — only `.py` sources are committed.
@@ -23,7 +23,7 @@ jupytext --to py:percent notebooks/01_eda.ipynb
 
 ## Package conventions
 
-- All imports in notebooks go through the `give_me_some_credit` package.
+- All imports in notebooks go through the `credit` package.
 - Column names are snake_case after loading (handled in `data/loader.py`).
 - Feature engineering is stateless: `build_features(df) -> df`, no side effects.
 

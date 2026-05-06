@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-DATA_DIR = Path(__file__).parents[3] / "data"
+DATA_DIR = Path(__file__).parents[2] / "data"
 
 
 def load_train() -> pd.DataFrame:

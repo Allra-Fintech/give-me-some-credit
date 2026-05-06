@@ -13,7 +13,7 @@ Papermill       →  parameterized execution & automation
 ## Project layout
 
 ```
-give_me_some_credit/   # installable package — all logic lives here
+credit/   # installable package — all logic lives here
   data/                #   load_train(), load_test()
   features/            #   build_features()
   models/              #   train(), evaluate()

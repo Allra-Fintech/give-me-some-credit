@@ -3,7 +3,7 @@ name = "give-me-some-credit"
 version = "0.1.0"
 description = "Credit default risk prediction pipeline"
 authors = ["JonghunYu <jonghun.yu@allra.co.kr>"]
-packages = [{ include = "give_me_some_credit" }]
+packages = [{ include = "credit" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"

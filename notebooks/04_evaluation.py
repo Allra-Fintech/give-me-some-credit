@@ -27,9 +27,9 @@ import joblib
 import pandas as pd
 from sklearn.metrics import RocCurveDisplay
 
-from give_me_some_credit.data import load_test, load_train
-from give_me_some_credit.features import build_features
-from give_me_some_credit.models.train import FEATURE_COLS
+from credit.data import load_test, load_train
+from credit.features import build_features
+from credit.models.train import FEATURE_COLS
 
 clf = joblib.load(model_path)
 
