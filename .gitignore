@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Papermill outputs (track only in outputs/)
+outputs/*.ipynb
+
+# Data (large files)
+data/*.csv
+data/*.xls
+data/*.xlsx
+!data/.gitkeep
+
+# Environment
+.env
+.envrc

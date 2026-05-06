@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "give-me-some-credit"
+version = "0.1.0"
+description = "Credit default risk prediction pipeline"
+authors = ["JonghunYu <jonghun.yu@allra.co.kr>"]
+packages = [{ include = "give_me_some_credit" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.2"
+numpy = "^1.26"
+scikit-learn = "^1.4"
+jupytext = "^1.16"
+papermill = "^2.6"
+ipykernel = "^6.29"
+jupyter = "^1.0"
+matplotlib = "^3.8"
+seaborn = "^0.13"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+ruff = "^0.4"
+mypy = "^1.10"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
