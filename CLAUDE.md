@@ -9,23 +9,25 @@
 
 ## Working with notebooks
 
-Convert `.py` → `.ipynb` before opening in Jupyter:
+`jupytext` ships a JupyterLab extension — open `.py` notebooks directly without any conversion step:
 
 ```bash
-jupytext --to notebook notebooks/01_eda.py
+jupyter lab notebooks/
 ```
 
-Sync back after editing in Jupyter:
-
-```bash
-jupytext --to py:percent notebooks/01_eda.ipynb
-```
+Right-click a `.py` file → **Open With → Notebook**. Edits auto-save back to the `.py` source. No manual `jupytext` conversion needed.
 
 ## Package conventions
 
 - All imports in notebooks go through the `credit` package.
-- Column names are snake_case after loading (handled in `data/loader.py`).
+- Column names are snake_case after loading (handled in `data/loader.py`); non-alphanumeric characters are also replaced with underscores.
 - Feature engineering is stateless: `build_features(df) -> df`, no side effects.
+- Model utilities in `credit.models`: `train`, `evaluate`, `compare_models` (5-fold CV AUC across all candidates), `calibration_curves`.
+- Current model candidates: LogisticRegression, RandomForest, GradientBoosting, XGBoost.
+
+## Data
+
+Raw CSV files live in `data/` (`cs-training.csv`, `cs-test.csv`). Load via `credit.data.load_train()` — do not read files directly in notebooks.
 
 ## Adding a new notebook
 
@@ -34,4 +36,4 @@ jupytext --to py:percent notebooks/01_eda.ipynb
 
 ## Dependencies
 
-Managed by Poetry. Add packages with `poetry add <pkg>`, not pip.
+Managed by Poetry. Add packages with `poetry add <pkg>`, not pip. XGBoost is a core (non-dev) dependency.
