@@ -25,7 +25,6 @@ notebooks/             # Jupytext percent-format .py files (version-control frie
   04_evaluation.py
 outputs/               # Papermill-executed .ipynb outputs (gitignored except .gitkeep)
 data/                  # raw CSVs (gitignored)
-tests/
 ```
 
 ## Setup (macOS / Linux)
