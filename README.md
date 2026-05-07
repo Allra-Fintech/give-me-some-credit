@@ -62,6 +62,18 @@ Or configure Jupytext to sync automatically — edit `~/.jupyter/jupyter_noteboo
 c.ContentsManager.default_jupytext_formats = "ipynb,py:percent"
 ```
 
+## Watch notebooks (auto-convert on save)
+
+`watchdog` (installed as a dev dependency) can re-run Jupytext whenever a `.py` notebook changes:
+
+```bash
+watchmedo shell-command \
+  --patterns="*.py" \
+  --recursive \
+  --command='jupytext --to notebook "${watch_src_path}"' \
+  notebooks/
+```
+
 ## Run a notebook with Papermill
 
 Papermill requires a `.ipynb` input, so convert with Jupytext first:
