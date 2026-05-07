@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pandas as pd
-from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier, ExtraTreesClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedKFold, cross_val_score
@@ -52,7 +52,6 @@ def compare_models(df: pd.DataFrame, cv: int = 5) -> pd.DataFrame:
     candidates = {
         "LogisticRegression": make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, random_state=42)),
         "RandomForest": RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1),
-        "ExtraTrees": ExtraTreesClassifier(n_estimators=100, random_state=42, n_jobs=-1),
         "GradientBoosting": GradientBoostingClassifier(n_estimators=100, max_depth=4, random_state=42),
         "XGBoost": XGBClassifier(n_estimators=100, max_depth=4, random_state=42, eval_metric="auc", verbosity=0),
     }
