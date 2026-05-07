@@ -32,7 +32,16 @@ tests/
 
 ```bash
 poetry install
-poetry shell
+```
+
+Activate the virtual environment (Poetry 2.0+):
+
+```bash
+# Option 1 — recommended
+source $(poetry env info --path)/bin/activate
+
+# Option 2 — one-off commands without activating
+poetry run python ...
 ```
 
 Install the Jupyter kernel for this env:
@@ -55,8 +64,12 @@ c.ContentsManager.default_jupytext_formats = "ipynb,py:percent"
 
 ## Run a notebook with Papermill
 
+Papermill requires a `.ipynb` input, so convert with Jupytext first:
+
 ```bash
-papermill notebooks/03_model_training.py outputs/03_model_training.ipynb \
+jupytext --to notebook notebooks/03_model_training.py
+
+papermill notebooks/03_model_training.ipynb outputs/03_model_training.ipynb \
   -p n_estimators 200 \
   -p max_depth 5
 ```
