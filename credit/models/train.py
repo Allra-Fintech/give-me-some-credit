@@ -4,7 +4,8 @@ import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
-from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.calibration import calibration_curve
+from sklearn.model_selection import StratifiedKFold, cross_val_score, train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
@@ -66,3 +67,27 @@ def compare_models(df: pd.DataFrame, cv: int = 5) -> pd.DataFrame:
         .sort_values("auc_mean", ascending=False)
         .reset_index(drop=True)
     )
+
+
+def calibration_curves(df: pd.DataFrame, n_bins: int = 10) -> dict[str, tuple]:
+    X = df[FEATURE_COLS]
+    y = df[TARGET]
+    X_train, X_val, y_train, y_val = train_test_split(
+        X, y, test_size=0.2, stratify=y, random_state=42
+    )
+
+    candidates = {
+        "LogisticRegression": make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, random_state=42)),
+        "RandomForest": RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1),
+        "GradientBoosting": GradientBoostingClassifier(n_estimators=100, max_depth=4, random_state=42),
+        "XGBoost": XGBClassifier(n_estimators=100, max_depth=4, random_state=42, eval_metric="auc", verbosity=0),
+    }
+
+    curves = {}
+    for name, clf in candidates.items():
+        clf.fit(X_train, y_train)
+        proba = clf.predict_proba(X_val)[:, 1]
+        frac_pos, mean_pred = calibration_curve(y_val, proba, n_bins=n_bins)
+        curves[name] = (frac_pos, mean_pred)
+
+    return curves
