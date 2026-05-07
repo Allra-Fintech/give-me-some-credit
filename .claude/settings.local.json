@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(poetry --version)",
-      "Bash(git *)",
-      "Bash(xargs sed -i '' 's/give_me_some_credit/credit/g')"
-    ]
-  }
-}

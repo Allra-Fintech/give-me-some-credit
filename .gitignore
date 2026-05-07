@@ -21,3 +21,6 @@ data/*.xlsx
 # Environment
 .env
 .envrc
+
+# claude
+.claude/*.local.json
