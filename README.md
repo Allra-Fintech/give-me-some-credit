@@ -55,7 +55,7 @@ python -m ipykernel install --user --name give-me-some-credit
 `jupytext` ships with a JupyterLab extension — open `.py` notebooks directly as notebooks, write code, and run cells without any conversion step:
 
 ```bash
-jupyter lab
+jupyter lab notebooks/
 ```
 
 Right-click a `.py` file → **Open With → Notebook**. Edits are saved back to the `.py` file automatically.
