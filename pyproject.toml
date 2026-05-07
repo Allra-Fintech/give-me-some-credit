@@ -22,10 +22,14 @@ pytest = "^8.0"
 ruff = "^0.4"
 mypy = "^1.10"
 watchdog = "^6.0.0"
+taskipy = "^1.14.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+watch = "watchmedo shell-command --patterns='*.py' --recursive --command='jupytext --to notebook \"${watch_src_path}\"' notebooks/"
 
 [tool.ruff]
 line-length = 100

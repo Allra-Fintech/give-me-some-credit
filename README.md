@@ -67,11 +67,7 @@ c.ContentsManager.default_jupytext_formats = "ipynb,py:percent"
 `watchdog` (installed as a dev dependency) can re-run Jupytext whenever a `.py` notebook changes:
 
 ```bash
-watchmedo shell-command \
-  --patterns="*.py" \
-  --recursive \
-  --command='jupytext --to notebook "${watch_src_path}"' \
-  notebooks/
+poetry run task watch
 ```
 
 ## Run a notebook with Papermill
