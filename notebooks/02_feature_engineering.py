@@ -16,6 +16,7 @@
 # # 02 — Feature Engineering
 #
 # Applies `build_features` from the package and inspects the result.
+# Updated to test auto-conversion via watchdog.
 
 # %% tags=["parameters"]
 output_path: str = "../outputs/02_feature_engineering.ipynb"
