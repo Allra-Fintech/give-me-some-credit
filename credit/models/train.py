@@ -10,13 +10,13 @@ from credit.features.engineering import TARGET
 FEATURE_COLS = [
     "revolving_utilization_of_unsecured_lines",
     "age",
-    "number_of_time30_59days_past_due_not_worse",
+    "number_of_time30_59_days_past_due_not_worse",
     "debt_ratio_clipped",
     "monthly_income",
     "number_of_open_credit_lines_and_loans",
     "number_of_times90_days_late",
     "number_real_estate_loans_or_lines",
-    "number_of_time60_89days_past_due_not_worse",
+    "number_of_time60_89_days_past_due_not_worse",
     "number_of_dependents",
     "income_per_dependent",
     "total_past_due",
@@ -27,7 +27,8 @@ FEATURE_COLS = [
 def train(df: pd.DataFrame, **kwargs) -> GradientBoostingClassifier:
     X = df[FEATURE_COLS]
     y = df[TARGET]
-    clf = GradientBoostingClassifier(n_estimators=100, max_depth=4, random_state=42, **kwargs)
+    params = {"n_estimators": 100, "max_depth": 4, "random_state": 42, **kwargs}
+    clf = GradientBoostingClassifier(**params)
     clf.fit(X, y)
     return clf
 
