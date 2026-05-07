@@ -1,1 +1,1 @@
-from credit.models.train import train, evaluate
+from credit.models.train import train, evaluate, compare_models

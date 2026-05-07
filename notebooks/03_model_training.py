@@ -15,7 +15,8 @@
 # %% [markdown]
 # # 03 — Model Training
 #
-# Trains a GradientBoostingClassifier on the full training set and reports ROC-AUC.
+# Compares multiple classifiers with 5-fold cross-validated ROC-AUC,
+# then trains the best model on the full dataset.
 
 # %% tags=["parameters"]
 n_estimators: int = 100
@@ -27,13 +28,27 @@ import joblib
 
 from credit.data import load_train
 from credit.features import build_features
-from credit.models import evaluate, train
+from credit.models import compare_models, evaluate, train
 from credit.utils import get_logger
 
 log = get_logger("03_model_training")
 
 # %%
 df = build_features(load_train())
+
+# %% [markdown]
+# ## Model comparison (5-fold CV ROC-AUC)
+
+# %%
+results = compare_models(df)
+results.style.format({"auc_mean": "{:.4f}", "auc_std": "{:.4f}"}).bar(
+    subset=["auc_mean"], color="#5fba7d"
+)
+
+# %% [markdown]
+# ## Train best model on full dataset
+
+# %%
 clf = train(df, n_estimators=n_estimators, max_depth=max_depth)
 
 metrics = evaluate(clf, df)

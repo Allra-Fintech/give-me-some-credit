@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 import pandas as pd
-from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier, ExtraTreesClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from xgboost import XGBClassifier
 
 from credit.features.engineering import TARGET
 
@@ -38,3 +42,28 @@ def evaluate(clf: GradientBoostingClassifier, df: pd.DataFrame) -> dict[str, flo
     y = df[TARGET]
     proba = clf.predict_proba(X)[:, 1]
     return {"roc_auc": roc_auc_score(y, proba)}
+
+
+def compare_models(df: pd.DataFrame, cv: int = 5) -> pd.DataFrame:
+    X = df[FEATURE_COLS]
+    y = df[TARGET]
+    cv_split = StratifiedKFold(n_splits=cv, shuffle=True, random_state=42)
+
+    candidates = {
+        "LogisticRegression": make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, random_state=42)),
+        "RandomForest": RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1),
+        "ExtraTrees": ExtraTreesClassifier(n_estimators=100, random_state=42, n_jobs=-1),
+        "GradientBoosting": GradientBoostingClassifier(n_estimators=100, max_depth=4, random_state=42),
+        "XGBoost": XGBClassifier(n_estimators=100, max_depth=4, random_state=42, eval_metric="auc", verbosity=0),
+    }
+
+    rows = []
+    for name, clf in candidates.items():
+        scores = cross_val_score(clf, X, y, cv=cv_split, scoring="roc_auc", n_jobs=-1)
+        rows.append({"model": name, "auc_mean": scores.mean(), "auc_std": scores.std()})
+
+    return (
+        pd.DataFrame(rows)
+        .sort_values("auc_mean", ascending=False)
+        .reset_index(drop=True)
+    )
