@@ -56,12 +56,6 @@ Convert a notebook `.py` → `.ipynb` to open in Jupyter:
 jupytext --to notebook notebooks/01_eda.py
 ```
 
-Or configure Jupytext to sync automatically — edit `~/.jupyter/jupyter_notebook_config.py`:
-
-```python
-c.ContentsManager.default_jupytext_formats = "ipynb,py:percent"
-```
-
 ## Watch notebooks (auto-convert on save)
 
 `watchdog` (installed as a dev dependency) can re-run Jupytext whenever a `.py` notebook changes:
