@@ -50,19 +50,19 @@ Install the Jupyter kernel for this env:
 python -m ipykernel install --user --name give-me-some-credit
 ```
 
-## Working in JupyterLab
+## Interactive development (JupyterLab)
 
-`jupytext` ships with a JupyterLab extension — open `.py` notebooks directly as notebooks without any conversion step:
+`jupytext` ships with a JupyterLab extension — open `.py` notebooks directly as notebooks, write code, and run cells without any conversion step:
 
 ```bash
 jupyter lab
 ```
 
-Then right-click a `.py` file → **Open With → Notebook**. Edits are saved back to the `.py` file automatically.
+Right-click a `.py` file → **Open With → Notebook**. Edits are saved back to the `.py` file automatically.
 
-## Run a notebook with Papermill
+## Automated / parameterized runs (Papermill)
 
-Papermill requires a `.ipynb` input, so convert with Jupytext first:
+Use Papermill for batch execution with overridden parameters (e.g. in CI or experiments). It requires a `.ipynb` input, so convert first:
 
 ```bash
 jupytext --to notebook notebooks/03_model_training.py
