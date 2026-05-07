@@ -50,19 +50,15 @@ Install the Jupyter kernel for this env:
 python -m ipykernel install --user --name give-me-some-credit
 ```
 
-Convert a notebook `.py` → `.ipynb` to open in Jupyter:
+## Working in JupyterLab
+
+`jupytext` ships with a JupyterLab extension — open `.py` notebooks directly as notebooks without any conversion step:
 
 ```bash
-jupytext --to notebook notebooks/01_eda.py
+jupyter lab
 ```
 
-## Watch notebooks (auto-convert on save)
-
-`watchdog` (installed as a dev dependency) can re-run Jupytext whenever a `.py` notebook changes:
-
-```bash
-poetry run task watch
-```
+Then right-click a `.py` file → **Open With → Notebook**. Edits are saved back to the `.py` file automatically.
 
 ## Run a notebook with Papermill
 
