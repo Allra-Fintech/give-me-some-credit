@@ -67,7 +67,9 @@ print(f"Duplicate rows: {df.duplicated().sum()}")
 # %%
 fig, axes = plt.subplots(3, 4, figsize=(16, 10))
 for ax, col in zip(axes.flat, df.select_dtypes("number").columns):
-    df[col].dropna().hist(ax=ax, bins=40)
+    data = df[col].dropna()
+    data.hist(ax=ax, bins=40)
+    ax.set_xlim(data.min(), data.max())
     ax.set_title(col, fontsize=8)
 fig.tight_layout()
 plt.show()
