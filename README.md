@@ -28,7 +28,7 @@ data/                  # raw CSVs (gitignored)
 tests/
 ```
 
-## Setup
+## Setup (macOS / Linux)
 
 ```bash
 poetry install
@@ -47,6 +47,38 @@ poetry run python ...
 Install the Jupyter kernel for this env:
 
 ```bash
+python -m ipykernel install --user --name give-me-some-credit
+```
+
+## Setup (Windows)
+
+Install Poetry via PowerShell:
+
+```powershell
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+```
+
+If PowerShell blocks script execution, allow it first:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Then install dependencies and activate the environment:
+
+```powershell
+poetry install
+
+# activate
+& $(poetry env info --path)\Scripts\Activate.ps1
+
+# or run one-off commands without activating
+poetry run python ...
+```
+
+Install the Jupyter kernel:
+
+```powershell
 python -m ipykernel install --user --name give-me-some-credit
 ```
 
